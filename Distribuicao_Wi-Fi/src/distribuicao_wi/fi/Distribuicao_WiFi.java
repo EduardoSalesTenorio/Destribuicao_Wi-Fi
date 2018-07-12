@@ -4,38 +4,41 @@ import java.util.Random;
 
 /**
  * @author Eduardo Sales e-mail eduardosallis30@gmail.com
- *
  */
 public class Distribuicao_WiFi {
 
-    int numero_Pontos = 500;
+    int tamanho_Vetor = 1000;
 
-    int[] eixoX = new int[numero_Pontos];
-    int[] eixoY = new int[numero_Pontos];
-    double[] resultado = new double[numero_Pontos];
+    int alcance;
 
-    int[] roteador = {60, 50};
-    int alcance_Roteador = 50;
+    int[] eixoX = new int[tamanho_Vetor];
+    int[] eixoY = new int[tamanho_Vetor];
+    double[] resultado = new double[tamanho_Vetor];
+
+    int[] roteador = {400, 400};
+    int alcance_Roteador = 100;
+
+    int valor_Aleatorio = 800;
 
     int soma = 0;
     int result;
-    int alcance;
+
     double raiz;
 
     public static void main(String[] args) {
 
-        new Distribuicao_WiFi().valores_Aleatorio();
+        new Distribuicao_WiFi().criar_Populacao();
 
     }
 
-    void valores_Aleatorio() {
+    void criar_Populacao() {
 
         Random Aleatorio = new Random();
 
         for (int i = 0; i < eixoX.length; i++) {
 
-            eixoX[i] = Aleatorio.nextInt(500);
-            eixoY[i] = Aleatorio.nextInt(500);
+            eixoX[i] = Aleatorio.nextInt(valor_Aleatorio);
+            eixoY[i] = Aleatorio.nextInt(valor_Aleatorio);
             //System.out.println(eixoX[i]+"   " + eixoY[i]);
         }
         calculo_Distancia();
@@ -52,11 +55,11 @@ public class Distribuicao_WiFi {
 
         }
 
-        valor();
+        comparar_distancia();
 
     }
 
-    public void valor() {
+    public void comparar_distancia() {
         for (int i = 0; i < resultado.length; i++) {
             if (resultado[i] < alcance_Roteador) {
                 alcance += 1;
@@ -64,8 +67,9 @@ public class Distribuicao_WiFi {
 
         }
 
-        System.out.println("Numero de pontos: " + numero_Pontos);
+        System.out.println("Numero de pontos: " + tamanho_Vetor);
         System.out.println("Numero de pontos alcançados: " + alcance);
 
     }
+
 }
